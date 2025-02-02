@@ -9,29 +9,27 @@ on:
       - main
 
 jobs:
-  build_test:
+  build:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout the code
+      - name: Checkout repository
         uses: actions/checkout@v3
-        
-      - name: Setup .NET version
+      - name: Set .NET version
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '6'
-          
+          dotnet-version: 6
+      
       - name: Install Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          
+
       - name: Install dependencies
-        run: dotnet restore   
-        
+        run: dotnet restore
+
       - name: Build
         run: dotnet build --no-restore
-        
+
       - name: Run tests
         env:
           CHROMEWEBDRIVER: /usr/bin/google-chrome
