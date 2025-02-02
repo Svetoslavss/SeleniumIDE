@@ -27,11 +27,11 @@ public class TC01IfUserIsInvalidTryAgainTest
         options.AddArguments("disable-dev-shm-usage");
         options.AddArguments("disable-gpu");
         options.AddArguments("window-size=1920x1080");
+        options.AddArguments($"user-data-dir=/tmp/chrome-user-data-{Guid.NewGuid()}");
 
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         js = (IJavaScriptExecutor)driver;
         vars = new Dictionary<string, object>();
-    
     }
 
     [TearDown]
